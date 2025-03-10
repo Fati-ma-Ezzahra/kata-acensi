@@ -6,15 +6,15 @@ import com.prisonersdilemma.exceptions.InvalidChoiceHistory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChoiceHistory {
+public class ChoiceHistoryMatrix {
     private final List<List<ChoiceEnum>> suspectChoiceMatrix = new ArrayList<>();
 
-    public static ChoiceHistory initWithSuspects(int suspectCount) {
-        ChoiceHistory choiceHistory = new ChoiceHistory();
+    public static ChoiceHistoryMatrix initWithSuspects(int suspectCount) {
+        ChoiceHistoryMatrix choiceHistoryMatrix = new ChoiceHistoryMatrix();
         for (int i = 0; i < suspectCount; i++) {
-            choiceHistory.addSuspect();
+            choiceHistoryMatrix.addSuspect();
         }
-        return choiceHistory;
+        return choiceHistoryMatrix;
     }
 
     public void addSuspect(){

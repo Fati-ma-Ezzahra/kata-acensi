@@ -1,17 +1,17 @@
 package com.prisonersdilemma.entities;
 
 import com.prisonersdilemma.enums.ChoiceEnum;
-import com.prisonersdilemma.strategies.InterrogationStrategy;
+import com.prisonersdilemma.domain.strategies.InterrogationStrategy;
 
 public class Suspect {
     private final InterrogationStrategy strategy;
-    private final ChoiceHistory choiceHistory;
+    private final ChoiceHistoryMatrix choiceHistoryMatrix;
 
-    public Suspect(InterrogationStrategy strategy, ChoiceHistory choiceHistory) {
+    public Suspect(InterrogationStrategy strategy, ChoiceHistoryMatrix choiceHistoryMatrix) {
         this.strategy = strategy;
-        this.choiceHistory = choiceHistory;
+        this.choiceHistoryMatrix = choiceHistoryMatrix;
     }
-    public ChoiceEnum getNextChoice(int currentSession, ChoiceHistory choiceHistory) {
-        return strategy.getNextChoice(currentSession, choiceHistory);
+    public ChoiceEnum getNextChoice(int currentSession, ChoiceHistoryMatrix choiceHistoryMatrix) {
+        return strategy.getNextChoice(currentSession, choiceHistoryMatrix);
     }
 }
