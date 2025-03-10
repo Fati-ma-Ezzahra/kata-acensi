@@ -1,11 +1,9 @@
-import com.prisonersdilemma.entities.Suspect;
+package entities;
+
+import com.prisonersdilemma.entities.Choice;
 import com.prisonersdilemma.enums.ChoiceEnum;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.platform.commons.util.ReflectionUtils;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -16,28 +14,28 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class SuspectTest {
+public class ChoiceTest {
     @Mock
     Random fakeRandom;
-    Suspect suspect = new Suspect();
+    Choice choice = new Choice();
     @Test
     public void givenSuspect_whenDenounce_thenDenounce() {
-        assertEquals(ChoiceEnum.DENOUNCE, suspect.denounce());
+        assertEquals(ChoiceEnum.DENOUNCE, choice.denounce());
     }
     @Test
     public void givenSuspect_whenSilence_thenSilence() {
-        assertEquals(ChoiceEnum.SILENCE, suspect.silence());
+        assertEquals(ChoiceEnum.SILENCE, choice.silence());
     }
     @Test
     public void givenSuspect_whenRandomEqualsZero_thenDenounce() {
-        ReflectionTestUtils.setField(suspect, "random", fakeRandom);
+        ReflectionTestUtils.setField(choice, "random", fakeRandom);
         when(fakeRandom.nextInt(2)).thenReturn(0);
-        assertEquals(ChoiceEnum.DENOUNCE, suspect.randomChoice());
+        assertEquals(ChoiceEnum.DENOUNCE, choice.randomChoice());
     }
     @Test
     public void givenSuspect_whenRandomEqualsOne_thenSilence() {
-        ReflectionTestUtils.setField(suspect, "random", fakeRandom);
+        ReflectionTestUtils.setField(choice, "random", fakeRandom);
         when(fakeRandom.nextInt(2)).thenReturn(1);
-        assertEquals(ChoiceEnum.SILENCE, suspect.randomChoice());
+        assertEquals(ChoiceEnum.SILENCE, choice.randomChoice());
     }
 }

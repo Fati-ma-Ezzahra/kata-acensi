@@ -1,3 +1,5 @@
+package entities;
+
 import com.prisonersdilemma.entities.ChoiceHistory;
 import com.prisonersdilemma.enums.ChoiceEnum;
 import com.prisonersdilemma.exceptions.InvalidChoiceHistory;
