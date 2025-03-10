@@ -74,9 +74,9 @@ class Suspect2StrategyTest {
 
     @Test
     void givenThirdSessionWithDenounce_whenGetNextChoice_ThenSuspect1MostFrequentChoice() {
-        int currentSession = 4;
+        int currentSession = 3;
         List<List<ChoiceEnum>> choiceMatrix = List.of(
-                Arrays.asList(ChoiceEnum.DENOUNCE, ChoiceEnum.DENOUNCE, ChoiceEnum.SILENCE),
+                Arrays.asList(ChoiceEnum.DENOUNCE, ChoiceEnum.DENOUNCE, ChoiceEnum.SILENCE,ChoiceEnum.SILENCE),
                 Arrays.asList(ChoiceEnum.SILENCE, ChoiceEnum.DENOUNCE, ChoiceEnum.SILENCE)
         );
         when(choiceHistoryMatrix.getSuspectChoiceMatrix()).thenReturn(choiceMatrix);

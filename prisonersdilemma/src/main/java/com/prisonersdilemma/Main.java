@@ -1,17 +1,36 @@
 package com.prisonersdilemma;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import com.prisonersdilemma.domain.Interrogation;
+import com.prisonersdilemma.exceptions.InvalidChoiceHistory;
+
+import java.util.List;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        System.out.println("\uFE0F\uD83D\uDC6E Welcome to prisoners dilemma! \uFE0F\uD83D\uDC6E");
+        boolean tryAgain = true;
+        Interrogation interrogation = new Interrogation();
+        Scanner scanner = new Scanner(System.in);
+        while (tryAgain){
+            try {
+                List<Integer> result = interrogation.startSimulation();
+                System.out.println("\uD83D\uDCCA Interrogation results: ");
+                System.out.println("Suspect 1: " + result.get(0));
+                System.out.println("Suspect 2: " + result.get(1));
+                // Ask the user if they want to continue
+                System.out.print("Do you want to try again? (y/n): ");
+                String response = scanner.nextLine().trim().toLowerCase();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+                // Check if the user wants to try again
+                if (!response.equals("y")) {
+                    tryAgain = false; // Exit the loop if the user doesn't want to continue
+                    System.out.println("Exiting the program...");
+                }
+            } catch (InvalidChoiceHistory e) {
+                System.out.println("Error: " + e.getMessage());
+            }
         }
+
     }
 }
