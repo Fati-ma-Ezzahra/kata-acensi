@@ -30,8 +30,8 @@ public class InterrogationSimulator {
         return ScoreCalculator.getFinalScore(choiceHistoryMatrix);
     }
     private void nextSession() {
-        ChoiceEnum choice1 = suspect1.getNextChoice(currentSession, choiceHistoryMatrix);
-        ChoiceEnum choice2 = suspect2.getNextChoice(currentSession, choiceHistoryMatrix);
+        ChoiceEnum choice1 = suspect1.getNextChoice(currentSession);
+        ChoiceEnum choice2 = suspect2.getNextChoice(currentSession);
 
         choiceHistoryMatrix.saveChoice(0,choice1);
         choiceHistoryMatrix.saveChoice(1,choice2);

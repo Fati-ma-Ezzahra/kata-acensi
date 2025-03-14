@@ -11,7 +11,7 @@ public class Suspect {
         this.strategy = strategy;
         this.choiceHistoryMatrix = choiceHistoryMatrix;
     }
-    public ChoiceEnum getNextChoice(int currentSession, ChoiceHistoryMatrix choiceHistoryMatrix) {
+    public ChoiceEnum getNextChoice(int currentSession) {
         return strategy.getNextChoice(currentSession, choiceHistoryMatrix);
     }
 }

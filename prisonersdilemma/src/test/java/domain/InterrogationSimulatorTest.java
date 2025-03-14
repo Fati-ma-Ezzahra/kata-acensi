@@ -42,17 +42,17 @@ public class InterrogationSimulatorTest {
     public void testStart() throws InvalidChoiceHistory {
         ReflectionTestUtils.setField(interrogationSimulator, "suspect1", suspect1);
         ReflectionTestUtils.setField(interrogationSimulator, "suspect2", suspect2);
-        when(suspect1.getNextChoice(anyInt(), any(ChoiceHistoryMatrix.class)))
+        when(suspect1.getNextChoice(anyInt()))
                 .thenReturn(ChoiceEnum.SILENCE);
-        when(suspect2.getNextChoice(anyInt(), any(ChoiceHistoryMatrix.class)))
+        when(suspect2.getNextChoice(anyInt()))
                 .thenReturn(ChoiceEnum.DENOUNCE);
 
         List<Integer> mockFinalScores = Arrays.asList(-100, 0);
         List<Integer> finalScores = interrogationSimulator.start();
 
         assertEquals(mockFinalScores, finalScores);
-        verify(suspect1, times(10)).getNextChoice(anyInt(), any(ChoiceHistoryMatrix.class)); // Ensure suspect1 makes 10 choices
-        verify(suspect2, times(10)).getNextChoice(anyInt(), any(ChoiceHistoryMatrix.class)); // Ensure suspect2 makes 10 choices
+        verify(suspect1, times(10)).getNextChoice(anyInt()); // Ensure suspect1 makes 10 choices
+        verify(suspect2, times(10)).getNextChoice(anyInt()); // Ensure suspect2 makes 10 choices
     }
 
     @Test
@@ -60,9 +60,9 @@ public class InterrogationSimulatorTest {
         // Mock the suspects' choices for each session
         ReflectionTestUtils.setField(interrogationSimulator, "suspect1", suspect1);
         ReflectionTestUtils.setField(interrogationSimulator, "suspect2", suspect2);
-        when(suspect1.getNextChoice(anyInt(), any(ChoiceHistoryMatrix.class)))
+        when(suspect1.getNextChoice(anyInt()))
                 .thenReturn(ChoiceEnum.SILENCE);
-        when(suspect2.getNextChoice(anyInt(), any(ChoiceHistoryMatrix.class)))
+        when(suspect2.getNextChoice(anyInt()))
                 .thenReturn(ChoiceEnum.SILENCE);
 
         List<Integer> mockFinalScores = Arrays.asList(-10, -10);
@@ -71,7 +71,7 @@ public class InterrogationSimulatorTest {
             assertEquals(mockFinalScores, finalScores); // Ensure the session gets reset everytime
         }
 
-        verify(suspect1, times(100)).getNextChoice(anyInt(), any(ChoiceHistoryMatrix.class));
-        verify(suspect2, times(100)).getNextChoice(anyInt(), any(ChoiceHistoryMatrix.class));
+        verify(suspect1, times(100)).getNextChoice(anyInt());
+        verify(suspect2, times(100)).getNextChoice(anyInt());
     }
 }
