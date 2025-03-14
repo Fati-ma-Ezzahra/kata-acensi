@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
@@ -49,6 +48,7 @@ class Suspect1StrategyTest {
         assertEquals(mockChoice, result);
         verify(choice, times(1)).randomChoice();  // Verifies that randomChoice was called once
     }
+    // il faut connaitre le resultat aussi == Mok du random
 
     @Test
     void givenSecondSession_whenGetNextChoice_ThenReturnRandomChoice() {

@@ -9,25 +9,25 @@ import com.prisonersdilemma.domain.strategies.Suspect2Strategy;
 
 import java.util.List;
 
-public class Interrogation {
+public class InterrogationSimulator {
     private ChoiceHistoryMatrix choiceHistoryMatrix;
     private final Suspect suspect1;
     private final Suspect suspect2;
     private int currentSession;
-    public Interrogation() {
+    public InterrogationSimulator() {
         this.choiceHistoryMatrix = ChoiceHistoryMatrix.initWithSuspects(2);
         this.suspect1= new Suspect(new Suspect1Strategy(), choiceHistoryMatrix);
         this.suspect2= new Suspect(new Suspect2Strategy(), choiceHistoryMatrix);
         this.currentSession = 0;
     }
-    public List<Integer> startSimulation() throws InvalidChoiceHistory {
+    public List<Integer> start() throws InvalidChoiceHistory {
         reset();
         for (int i=0;i<10;i++){
             nextSession();
         }
-        System.out.println("⚖\uFE0F Interrogation choices: ");
+        System.out.println("⚖\uFE0F InterrogationSimulator choices: ");
         System.out.println(choiceHistoryMatrix.getSuspectChoiceMatrix());
-        return choiceHistoryMatrix.getFinalScore();
+        return ScoreCalculator.getFinalScore(choiceHistoryMatrix);
     }
     private void nextSession() {
         ChoiceEnum choice1 = suspect1.getNextChoice(currentSession, choiceHistoryMatrix);

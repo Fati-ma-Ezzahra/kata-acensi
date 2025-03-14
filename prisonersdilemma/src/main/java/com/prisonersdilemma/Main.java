@@ -1,6 +1,6 @@
 package com.prisonersdilemma;
 
-import com.prisonersdilemma.domain.Interrogation;
+import com.prisonersdilemma.domain.InterrogationSimulator;
 import com.prisonersdilemma.exceptions.InvalidChoiceHistory;
 
 import java.util.List;
@@ -10,12 +10,12 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("\uFE0F\uD83D\uDC6E Welcome to prisoners dilemma! \uFE0F\uD83D\uDC6E");
         boolean tryAgain = true;
-        Interrogation interrogation = new Interrogation();
+        InterrogationSimulator interrogationSimulator = new InterrogationSimulator();
         Scanner scanner = new Scanner(System.in);
         while (tryAgain){
             try {
-                List<Integer> result = interrogation.startSimulation();
-                System.out.println("\uD83D\uDCCA Interrogation results: ");
+                List<Integer> result = interrogationSimulator.start();
+                System.out.println("\uD83D\uDCCA InterrogationSimulator results: ");
                 System.out.println("Suspect 1: " + result.get(0));
                 System.out.println("Suspect 2: " + result.get(1));
                 // Ask the user if they want to continue

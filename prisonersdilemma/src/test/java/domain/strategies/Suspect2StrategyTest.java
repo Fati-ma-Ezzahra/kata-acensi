@@ -48,13 +48,13 @@ class Suspect2StrategyTest {
 
     @Test
     void givenSecondSession_whenGetNextChoice_ThenReturnRandomChoice() {
-        ChoiceEnum mockChoice = ChoiceEnum.SILENCE;
+        ChoiceEnum mockChoice = ChoiceEnum.SILENCE;// random choice is the mocked one
         when(choice.randomChoice()).thenReturn(mockChoice);
 
         ChoiceEnum result = suspect2Strategy.getNextChoice(1, choiceHistoryMatrix);
 
-        assertEquals(mockChoice, result);
-        verify(choice, times(1)).randomChoice();  // Verifies that randomChoice() was called once
+        assertEquals(mockChoice, result); // result
+        verify(choice, times(1)).randomChoice();
     }
 
     @Test
@@ -121,16 +121,14 @@ class Suspect2StrategyTest {
     void givenEmptyList_whenGetChoiceFrequency_thenThrow() {
         ChoiceHistoryMatrix choiceHistoryMatrix = ChoiceHistoryMatrix.initWithSuspects(2);
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            suspect2Strategy.getNextChoice(3, choiceHistoryMatrix);
-        });
+        assertThrows(IllegalArgumentException.class, () -> suspect2Strategy.getNextChoice(3, choiceHistoryMatrix));
     }
 
     @Test
     void givenNullList_whenGetChoiceFrequency_thenThrow() {
-        assertThrows(NullPointerException.class, () -> {
-            suspect2Strategy.getNextChoice(3, null);
-        });
+        assertThrows(NullPointerException.class,
+                () -> suspect2Strategy.getNextChoice(3, null)
+        );
     }
 }
 

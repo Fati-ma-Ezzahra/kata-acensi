@@ -14,6 +14,7 @@ public class Choice {
     public ChoiceEnum silence(){
         return ChoiceEnum.SILENCE;
     }
+    //no random choice
     public ChoiceEnum randomChoice(){
         return ChoiceEnum.values()[random.nextInt(ChoiceEnum.values().length)];
     }
