@@ -1,12 +1,19 @@
 package com.prisonersdilemma.entities;
 
 import com.prisonersdilemma.enums.ChoiceEnum;
+import com.prisonersdilemma.exceptions.InvalidChoiceHistory;
 
 import java.util.Random;
 
-// Singleton
-public class Choice {
+public final class ChoiceGenerator {
     private final Random random = new Random();
+    private static final ChoiceGenerator INSTANCE = new ChoiceGenerator();
+
+    private ChoiceGenerator(){}
+
+    public static ChoiceGenerator getInstance() {
+        return INSTANCE;
+    }
 
     public ChoiceEnum denounce(){
         return ChoiceEnum.DENOUNCE;
@@ -15,7 +22,7 @@ public class Choice {
         return ChoiceEnum.SILENCE;
     }
     //no random choice
-    public ChoiceEnum randomChoice(){
+    public ChoiceEnum random(){
         return ChoiceEnum.values()[random.nextInt(ChoiceEnum.values().length)];
     }
 }

@@ -1,6 +1,6 @@
 package entities;
 
-import com.prisonersdilemma.entities.Choice;
+import com.prisonersdilemma.entities.ChoiceGenerator;
 import com.prisonersdilemma.enums.ChoiceEnum;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,28 +14,28 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ChoiceTest {
+public class ChoiceGeneratorTest {
     @Mock
     Random fakeRandom;
-    Choice choice = new Choice();
+    ChoiceGenerator choiceGenerator = ChoiceGenerator.getInstance();
     @Test
     public void givenSuspect_whenDenounce_thenDenounce() {
-        assertEquals(ChoiceEnum.DENOUNCE, choice.denounce());
+        assertEquals(ChoiceEnum.DENOUNCE, choiceGenerator.denounce());
     }
     @Test
     public void givenSuspect_whenSilence_thenSilence() {
-        assertEquals(ChoiceEnum.SILENCE, choice.silence());
+        assertEquals(ChoiceEnum.SILENCE, choiceGenerator.silence());
     }
     @Test
     public void givenSuspect_whenRandomEqualsZero_thenDenounce() {
-        ReflectionTestUtils.setField(choice, "random", fakeRandom);
+        ReflectionTestUtils.setField(choiceGenerator, "random", fakeRandom);
         when(fakeRandom.nextInt(2)).thenReturn(0);
-        assertEquals(ChoiceEnum.DENOUNCE, choice.randomChoice());
+        assertEquals(ChoiceEnum.DENOUNCE, choiceGenerator.random());
     }
     @Test
     public void givenSuspect_whenRandomEqualsOne_thenSilence() {
-        ReflectionTestUtils.setField(choice, "random", fakeRandom);
+        ReflectionTestUtils.setField(choiceGenerator, "random", fakeRandom);
         when(fakeRandom.nextInt(2)).thenReturn(1);
-        assertEquals(ChoiceEnum.SILENCE, choice.randomChoice());
+        assertEquals(ChoiceEnum.SILENCE, choiceGenerator.random());
     }
 }

@@ -1,18 +1,18 @@
 package com.prisonersdilemma.domain.strategies;
 
-import com.prisonersdilemma.entities.Choice;
+import com.prisonersdilemma.entities.ChoiceGenerator;
 import com.prisonersdilemma.entities.ChoiceHistoryMatrix;
 import com.prisonersdilemma.enums.ChoiceEnum;
 
 import java.util.List;
 
 public class Suspect1Strategy implements InterrogationStrategy {
-    private final Choice choice = new Choice();
+    private final ChoiceGenerator choiceGenerator = ChoiceGenerator.getInstance();
     private ChoiceEnum getFirstChoice(){
-        return choice.randomChoice();
+        return choiceGenerator.random();
     }
     private ChoiceEnum getSecondChoice(){
-        return choice.randomChoice();
+        return choiceGenerator.random();
     }
     private ChoiceEnum getOtherChoices(int currentSession, ChoiceHistoryMatrix choiceHistoryMatrix){
         List<ChoiceEnum> suspect2ChoiceList = choiceHistoryMatrix

@@ -1,7 +1,7 @@
 package domain.strategies;
 
 import com.prisonersdilemma.domain.strategies.Suspect2Strategy;
-import com.prisonersdilemma.entities.Choice;
+import com.prisonersdilemma.entities.ChoiceGenerator;
 import com.prisonersdilemma.entities.ChoiceHistoryMatrix;
 import com.prisonersdilemma.enums.ChoiceEnum;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,36 +25,36 @@ class Suspect2StrategyTest {
     private Suspect2Strategy suspect2Strategy;
 
     @Mock
-    private Choice choice;
+    private ChoiceGenerator choiceGenerator;
 
     @Mock
     private ChoiceHistoryMatrix choiceHistoryMatrix;
 
     @BeforeEach
     void setUp() {
-        ReflectionTestUtils.setField(suspect2Strategy, "choice", choice);
+        ReflectionTestUtils.setField(suspect2Strategy, "choiceGenerator", choiceGenerator);
     }
 
     @Test
     void givenFirstSession_whenGetNextChoice_ThenReturnSilence() {
         ChoiceEnum mockChoice = ChoiceEnum.SILENCE; // getFirstChoice() should return SILENCE
-        when(choice.silence()).thenReturn(mockChoice);
+        when(choiceGenerator.silence()).thenReturn(mockChoice);
 
         ChoiceEnum result = suspect2Strategy.getNextChoice(0, choiceHistoryMatrix);
 
         assertEquals(mockChoice, result);
-        verify(choice, times(1)).silence();  // Verifies that silence() was called once
+        verify(choiceGenerator, times(1)).silence();  // Verifies that silence() was called once
     }
 
     @Test
     void givenSecondSession_whenGetNextChoice_ThenReturnRandomChoice() {
-        ChoiceEnum mockChoice = ChoiceEnum.SILENCE;// random choice is the mocked one
-        when(choice.randomChoice()).thenReturn(mockChoice);
+        ChoiceEnum mockChoice = ChoiceEnum.SILENCE;// random choiceGenerator is the mocked one
+        when(choiceGenerator.random()).thenReturn(mockChoice);
 
         ChoiceEnum result = suspect2Strategy.getNextChoice(1, choiceHistoryMatrix);
 
         assertEquals(mockChoice, result); // result
-        verify(choice, times(1)).randomChoice();
+        verify(choiceGenerator, times(1)).random();
     }
 
     @Test

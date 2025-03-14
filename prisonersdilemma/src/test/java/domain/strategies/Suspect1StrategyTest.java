@@ -1,7 +1,7 @@
 package domain.strategies;
 
 import com.prisonersdilemma.domain.strategies.Suspect1Strategy;
-import com.prisonersdilemma.entities.Choice;
+import com.prisonersdilemma.entities.ChoiceGenerator;
 import com.prisonersdilemma.entities.ChoiceHistoryMatrix;
 import com.prisonersdilemma.enums.ChoiceEnum;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,40 +25,40 @@ class Suspect1StrategyTest {
     private Suspect1Strategy suspect1Strategy;
 
     @Mock
-    private Choice choice;
+    private ChoiceGenerator choiceGenerator;
 
     @Mock
     private ChoiceHistoryMatrix choiceHistoryMatrix;
 
     @BeforeEach
     void setUp() {
-        ReflectionTestUtils.setField(suspect1Strategy, "choice", choice);
+        ReflectionTestUtils.setField(suspect1Strategy, "choiceGenerator", choiceGenerator);
     }
 
     @Test
     void givenFirstSession_whenGetNextChoice_ThenReturnRandomChoice() {
         // Arrange
         ChoiceEnum mockChoice = ChoiceEnum.SILENCE; // Assuming SILENCE is part of ChoiceEnum
-        when(choice.randomChoice()).thenReturn(mockChoice);
+        when(choiceGenerator.random()).thenReturn(mockChoice);
 
         // Act
         ChoiceEnum result = suspect1Strategy.getNextChoice(0, choiceHistoryMatrix);
 
         // Assert
         assertEquals(mockChoice, result);
-        verify(choice, times(1)).randomChoice();  // Verifies that randomChoice was called once
+        verify(choiceGenerator, times(1)).random();  // Verifies that random was called once
     }
     // il faut connaitre le resultat aussi == Mok du random
 
     @Test
     void givenSecondSession_whenGetNextChoice_ThenReturnRandomChoice() {
         ChoiceEnum mockChoice = ChoiceEnum.DENOUNCE;
-        when(choice.randomChoice()).thenReturn(mockChoice);
+        when(choiceGenerator.random()).thenReturn(mockChoice);
 
         ChoiceEnum result = suspect1Strategy.getNextChoice(1, choiceHistoryMatrix);
 
         assertEquals(mockChoice, result);
-        verify(choice, times(1)).randomChoice();  // Verifies that randomChoice was called once
+        verify(choiceGenerator, times(1)).random();  // Verifies that random was called once
     }
 
     @Test
@@ -72,7 +72,7 @@ class Suspect1StrategyTest {
 
         ChoiceEnum result = suspect1Strategy.getNextChoice(currentSession, choiceHistoryMatrix);
 
-        assertEquals(ChoiceEnum.DENOUNCE, result);  // Should return the $currentSession-1 = 1 choice
+        assertEquals(ChoiceEnum.DENOUNCE, result);  // Should return the $currentSession-1 = 1 choiceGenerator
         verify(choiceHistoryMatrix, times(1)).getSuspectChoiceMatrix();
     }
 
