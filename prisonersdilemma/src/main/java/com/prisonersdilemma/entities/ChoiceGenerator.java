@@ -1,8 +1,6 @@
 package com.prisonersdilemma.entities;
 
 import com.prisonersdilemma.enums.ChoiceEnum;
-import com.prisonersdilemma.exceptions.InvalidChoiceHistory;
-
 import java.util.Random;
 
 public final class ChoiceGenerator {

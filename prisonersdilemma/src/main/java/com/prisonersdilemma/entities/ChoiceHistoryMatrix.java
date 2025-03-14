@@ -5,7 +5,7 @@ import com.prisonersdilemma.exceptions.InvalidChoiceHistory;
 
 import java.util.ArrayList;
 import java.util.List;
-//diviser en trois interface differente : historique , resultat, choix
+
 public class ChoiceHistoryMatrix {
     private final List<List<ChoiceEnum>> suspectChoiceMatrix = new ArrayList<>();
 
